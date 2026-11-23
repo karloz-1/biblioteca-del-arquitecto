@@ -68,6 +68,56 @@ class Program
         return i;
     }
 
+    static List<Libro> CreateTestBooks()
+    {
+        return new List<Libro>
+        {
+            new Libro(1, "Gabriel García Márquez", "Cien años de soledad"),
+            new Libro(2, "Jorge Luis Borges", "El Aleph")
+        };
+    }
+
+    static List<Usuario> CreateTestUsers()
+    {
+        return new List<Usuario>
+        {
+            new Usuario(1012345, "Ana", "Martínez", 28),
+            new Usuario(2078901, "Luis", "Ramírez", 34)
+        };
+    }
+
+    static Prestamo CreateTestLoan()
+    {
+        return new Prestamo("Ana Martínez", DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-2));
+    }
+
+    static void PrintBookInfo(Libro libro)
+    {
+        System.Console.WriteLine(libro.ResumenCorto());
+        System.Console.WriteLine(libro.DetalleCompleto());
+        System.Console.WriteLine($"ToString(): {libro}");
+        System.Console.WriteLine($"Validación Disponible: {(libro.Disponible ? "Sí" : "No")}");
+    }
+
+    static void PrintUserInfo(Usuario usuario)
+    {
+        System.Console.WriteLine(usuario.ResumenCorto());
+        System.Console.WriteLine(usuario.DetalleCompleto());
+        System.Console.WriteLine($"ToString(): {usuario}");
+        System.Console.WriteLine($"Validación Activo: {(usuario.Activo ? "Sí" : "No")}");
+    }
+
+    static void PrintLoanInfo(Prestamo prestamo)
+    {
+        System.Console.WriteLine(prestamo.ResumenCorto());
+        System.Console.WriteLine(prestamo.DetalleCompleto());
+        System.Console.WriteLine($"ToString(): {prestamo}");
+        System.Console.WriteLine($"Validación Estado: {prestamo.Estado}");
+        System.Console.WriteLine($"Validación FechaDevolución: {prestamo.FechaDevolucion?.ToString("dd/MM/yyyy") ?? "null"}");
+        System.Console.WriteLine($"Validación ¿Vencido?: {(prestamo.EstaVencido() ? "Sí" : "No")}");
+        System.Console.WriteLine($"Validación Días transcurridos: {prestamo.DiasTranscurridos()}");
+    }
+
     static void ExitRoutine()
     {
         Console.Clear();
@@ -133,6 +183,7 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Registrar Libro ===");
             System.Console.WriteLine("Registrando libro (simulación sin persistencia)...");
+            PrintBookInfo(CreateTestBooks()[0]);
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -172,6 +223,10 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Mostrar todos los libros ===");
                 System.Console.WriteLine("Mostrando todos los libros...");
+                foreach (Libro libro in CreateTestBooks())
+                {
+                    PrintBookInfo(libro);
+                }
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -181,6 +236,15 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Mostrar todos los libros disponibles ===");
                 System.Console.WriteLine("Mostrando libros disponibles...");
+                List<Libro> libros = CreateTestBooks();
+                libros[1].Disponible = false;
+                foreach (Libro libro in libros)
+                {
+                    if (libro.Disponible)
+                    {
+                        PrintBookInfo(libro);
+                    }
+                }
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -190,6 +254,15 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Mostrar libros prestados ===");
                 System.Console.WriteLine("Mostrando libros prestados...");
+                List<Libro> libros = CreateTestBooks();
+                libros[1].Disponible = false;
+                foreach (Libro libro in libros)
+                {
+                    if (!libro.Disponible)
+                    {
+                        PrintBookInfo(libro);
+                    }
+                }
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -200,6 +273,7 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Ver detalles del libro ===");
             System.Console.WriteLine("Mostrando detalles del libro (por ID/ISBN)...");
+            PrintBookInfo(CreateTestBooks()[0]);
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -239,6 +313,9 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Editar titulo del Libro ===");
                 System.Console.WriteLine("Editando titulo del Libro...");
+                Libro libro = CreateTestBooks()[0];
+                libro.NombreLibro = "Cien años de soledad (edición revisada)";
+                PrintBookInfo(libro);
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -247,6 +324,9 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Editar autor del Libro ===");
                 System.Console.WriteLine("Editando autor del Libro...");
+                Libro libro = CreateTestBooks()[0];
+                libro.NombreAutor = "Gabriel García Márquez (edición conmemorativa)";
+                PrintBookInfo(libro);
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -255,6 +335,7 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Editar año / categoría del Libro ===");
                 System.Console.WriteLine("Editando año / categoría del Libro...");
+                PrintBookInfo(CreateTestBooks()[0]);
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -265,6 +346,9 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Eliminar Libro ===");
             System.Console.WriteLine("Validando que no esté prestado: no se permite eliminar un libro prestado...");
+            List<Libro> libros = CreateTestBooks();
+            libros[1].Disponible = false;
+            PrintBookInfo(libros[1]);
             System.Console.WriteLine("Eliminando libro (simulación)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
@@ -311,6 +395,7 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Registrar Usuario ===");
             System.Console.WriteLine("Registrando usuario (simulación sin persistencia)...");
+            PrintUserInfo(CreateTestUsers()[0]);
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -320,6 +405,10 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Listar Usuarios ===");
             System.Console.WriteLine("Mostrando lista de usuarios...");
+            foreach (Usuario usuario in CreateTestUsers())
+            {
+                PrintUserInfo(usuario);
+            }
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -329,6 +418,7 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Ver detalle de usuario ===");
             System.Console.WriteLine("Mostrando detalle del usuario (por ID/documento)...");
+            PrintUserInfo(CreateTestUsers()[0]);
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -368,6 +458,9 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Editar nombre de usuario ===");
                 System.Console.WriteLine("Editando nombre...");
+                Usuario usuario = CreateTestUsers()[0];
+                usuario.NombreUsuario = "Ana María";
+                PrintUserInfo(usuario);
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -377,6 +470,7 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Editar contacto de usuario ===");
                 System.Console.WriteLine("Editando contacto...");
+                PrintUserInfo(CreateTestUsers()[0]);
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -386,6 +480,10 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Activar / Desactivar usuario ===");
                 System.Console.WriteLine("Cambiando estado del usuario...");
+                Usuario usuario = CreateTestUsers()[0];
+                System.Console.WriteLine($"Estado inicial - Activo: {(usuario.Activo ? "Sí" : "No")}");
+                usuario.Activo = !usuario.Activo;
+                PrintUserInfo(usuario);
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -396,6 +494,7 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Eliminar Usuario ===");
             System.Console.WriteLine("Validando préstamos activos: no se permite eliminar un usuario con préstamos activos...");
+            PrintUserInfo(CreateTestUsers()[0]);
             System.Console.WriteLine("Eliminando usuario (simulación)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
@@ -446,6 +545,7 @@ class Program
             System.Console.WriteLine("- El libro debe existir y estar disponible.");
             System.Console.WriteLine("- El usuario no debe superar el límite de préstamos permitidos.");
             System.Console.WriteLine("Creando préstamo (simulación)...");
+            PrintLoanInfo(CreateTestLoan());
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -485,6 +585,7 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Mostrar todos los préstamos ===");
                 System.Console.WriteLine("Mostrando...");
+                PrintLoanInfo(CreateTestLoan());
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -494,6 +595,11 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Mostrar préstamos activos ===");
                 System.Console.WriteLine("Mostrando...");
+                Prestamo prestamo = CreateTestLoan();
+                if (prestamo.Estado == EstadoPrestamo.Activo)
+                {
+                    PrintLoanInfo(prestamo);
+                }
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -503,6 +609,10 @@ class Program
                 Console.Clear();
                 System.Console.WriteLine("=== Mostrar préstamos cerrados ===");
                 System.Console.WriteLine("Mostrando...");
+                Prestamo prestamo = CreateTestLoan();
+                prestamo.Estado = EstadoPrestamo.Devuelto;
+                prestamo.FechaDevolucion = DateTime.Now;
+                PrintLoanInfo(prestamo);
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -513,6 +623,7 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Ver detalle de préstamo ===");
             System.Console.WriteLine("Mostrando detalles por ID...");
+            PrintLoanInfo(CreateTestLoan());
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -522,6 +633,10 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Registrar devolución ===");
             System.Console.WriteLine("Marcando libro como disponible y cerrando préstamo...");
+            Prestamo prestamo = CreateTestLoan();
+            prestamo.Estado = EstadoPrestamo.Devuelto;
+            prestamo.FechaDevolucion = DateTime.Now;
+            PrintLoanInfo(prestamo);
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -531,6 +646,7 @@ class Program
             Console.Clear();
             System.Console.WriteLine("=== Eliminar préstamo ===");
             System.Console.WriteLine("Reglas sugeridas: solo eliminar préstamos cerrados o corregidos, nunca uno activo sin devolución.");
+            PrintLoanInfo(CreateTestLoan());
             System.Console.WriteLine("Eliminando registro de préstamo (simulación)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
@@ -708,29 +824,44 @@ class Program
 
             static void ReportByUser()
             {
-                ShowReport("Reporte de préstamos por usuario", "Mostrando préstamos agrupados por usuario...");
+                Console.Clear();
+                System.Console.WriteLine("=== Reporte de préstamos por usuario ===");
+                System.Console.WriteLine("Mostrando préstamos agrupados por usuario...");
+                PrintUserInfo(CreateTestUsers()[0]);
+                PrintLoanInfo(CreateTestLoan());
+                System.Console.WriteLine("Presione cualquier tecla para salir: ");
+                Console.ReadKey();
             }
 
             static void ReportByBook()
             {
-                ShowReport("Reporte de préstamos por libro", "Mostrando préstamos agrupados por libro...");
+                Console.Clear();
+                System.Console.WriteLine("=== Reporte de préstamos por libro ===");
+                System.Console.WriteLine("Mostrando préstamos agrupados por libro...");
+                PrintBookInfo(CreateTestBooks()[0]);
+                PrintLoanInfo(CreateTestLoan());
+                System.Console.WriteLine("Presione cualquier tecla para salir: ");
+                Console.ReadKey();
             }
 
             static void ReportOverdue()
             {
-                ShowReport("Reporte de préstamos vencidos", "Mostrando préstamos con fecha de vencimiento superada...");
+                Console.Clear();
+                System.Console.WriteLine("=== Reporte de préstamos vencidos ===");
+                System.Console.WriteLine("Mostrando préstamos con fecha de vencimiento superada...");
+                PrintLoanInfo(CreateTestLoan());
+                System.Console.WriteLine("Presione cualquier tecla para salir: ");
+                Console.ReadKey();
             }
 
             static void ReportSummary()
             {
-                ShowReport("Resumen general", "Mostrando el resumen de libros, usuarios y préstamos...");
-            }
-
-            static void ShowReport(string title, string message)
-            {
                 Console.Clear();
-                System.Console.WriteLine($"=== {title} ===");
-                System.Console.WriteLine(message);
+                System.Console.WriteLine("=== Resumen general ===");
+                System.Console.WriteLine($"Libros de prueba: {CreateTestBooks().Count}");
+                System.Console.WriteLine($"Usuarios de prueba: {CreateTestUsers().Count}");
+                System.Console.WriteLine("Préstamos de prueba: 1");
+                PrintLoanInfo(CreateTestLoan());
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
