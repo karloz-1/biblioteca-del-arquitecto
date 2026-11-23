@@ -9,6 +9,8 @@ public class Usuario
 
     public Usuario()
     {
+        NombreUsuario = string.Empty;
+        ApellidoUsuario = string.Empty;
         Activo = true;
     }
 
@@ -37,6 +39,7 @@ public class Usuario
 
         return $@"
         === Detalles Completos ===
+        Documento: {Documento}
         Nombre del usuario: {NombreUsuario} 
         Apellido del usuario: {ApellidoUsuario}
         Edad: {EdadUsuario}
