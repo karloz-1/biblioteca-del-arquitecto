@@ -568,14 +568,16 @@ class Program
                 switch (userOption)
                 {
                     case 1:
+                        SearchByTitle();
+                        break;
                     case 2:
+                        SearchByAuthor();
+                        break;
                     case 3:
+                        SearchByIdIsbn();
+                        break;
                     case 4:
-                        Console.Clear();
-                        System.Console.WriteLine("=== Buscando libro ===");
-                        System.Console.WriteLine("Mostrando resultados de la búsqueda...");
-                        System.Console.WriteLine("Presione cualquier tecla para salir: ");
-                        Console.ReadKey();
+                        SearchByCategory();
                         break;
                     case 5:
                         break;
@@ -586,6 +588,35 @@ class Program
                         break;
                 }
             } while (userOption != exitNumber);
+
+            static void SearchByTitle()
+            {
+                ShowSearchResult("Buscar libro por título", "Mostrando libros que coinciden con el título...");
+            }
+
+            static void SearchByAuthor()
+            {
+                ShowSearchResult("Buscar libro por autor", "Mostrando libros del autor indicado...");
+            }
+
+            static void SearchByIdIsbn()
+            {
+                ShowSearchResult("Buscar libro por ID/ISBN", "Mostrando el libro que coincide con el ID/ISBN...");
+            }
+
+            static void SearchByCategory()
+            {
+                ShowSearchResult("Buscar libro por categoría", "Mostrando libros de la categoría indicada...");
+            }
+
+            static void ShowSearchResult(string title, string message)
+            {
+                Console.Clear();
+                System.Console.WriteLine($"=== {title} ===");
+                System.Console.WriteLine(message);
+                System.Console.WriteLine("Presione cualquier tecla para salir: ");
+                Console.ReadKey();
+            }
         }
 
         static void SearchUser()
@@ -599,12 +630,10 @@ class Program
                 switch (userOption)
                 {
                     case 1:
+                        SearchByName();
+                        break;
                     case 2:
-                        Console.Clear();
-                        System.Console.WriteLine("=== Buscando usuario ===");
-                        System.Console.WriteLine("Mostrando resultados de la búsqueda...");
-                        System.Console.WriteLine("Presione cualquier tecla para salir: ");
-                        Console.ReadKey();
+                        SearchByIdDocument();
                         break;
                     case 3:
                         break;
@@ -615,6 +644,25 @@ class Program
                         break;
                 }
             } while (userOption != exitNumber);
+
+            static void SearchByName()
+            {
+                ShowSearchResult("Buscar usuario por nombre", "Mostrando usuarios que coinciden con el nombre...");
+            }
+
+            static void SearchByIdDocument()
+            {
+                ShowSearchResult("Buscar usuario por ID/documento", "Mostrando el usuario que coincide con el documento...");
+            }
+
+            static void ShowSearchResult(string title, string message)
+            {
+                Console.Clear();
+                System.Console.WriteLine($"=== {title} ===");
+                System.Console.WriteLine(message);
+                System.Console.WriteLine("Presione cualquier tecla para salir: ");
+                Console.ReadKey();
+            }
         }
 
         static void Reports()
@@ -628,14 +676,16 @@ class Program
                 switch (userOption)
                 {
                     case 1:
+                        ReportByUser();
+                        break;
                     case 2:
+                        ReportByBook();
+                        break;
                     case 3:
+                        ReportOverdue();
+                        break;
                     case 4:
-                        Console.Clear();
-                        System.Console.WriteLine("=== Generando reporte ===");
-                        System.Console.WriteLine("Mostrando información del reporte solicitado...");
-                        System.Console.WriteLine("Presione cualquier tecla para salir: ");
-                        Console.ReadKey();
+                        ReportSummary();
                         break;
                     case 5:
                         break;
@@ -646,6 +696,35 @@ class Program
                         break;
                 }
             } while (userOption != exitNumber);
+
+            static void ReportByUser()
+            {
+                ShowReport("Reporte de préstamos por usuario", "Mostrando préstamos agrupados por usuario...");
+            }
+
+            static void ReportByBook()
+            {
+                ShowReport("Reporte de préstamos por libro", "Mostrando préstamos agrupados por libro...");
+            }
+
+            static void ReportOverdue()
+            {
+                ShowReport("Reporte de préstamos vencidos", "Mostrando préstamos con fecha de vencimiento superada...");
+            }
+
+            static void ReportSummary()
+            {
+                ShowReport("Resumen general", "Mostrando el resumen de libros, usuarios y préstamos...");
+            }
+
+            static void ShowReport(string title, string message)
+            {
+                Console.Clear();
+                System.Console.WriteLine($"=== {title} ===");
+                System.Console.WriteLine(message);
+                System.Console.WriteLine("Presione cualquier tecla para salir: ");
+                Console.ReadKey();
+            }
         }
     }
 
