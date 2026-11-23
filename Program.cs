@@ -739,34 +739,13 @@ class Program
             switch (userOption)
             {
                 case 1:
-                    Console.Clear();
-                    System.Console.WriteLine("=== Guardar datos ===");
-                    System.Console.WriteLine("Guardando información de libros, usuarios y préstamos...");
-                    System.Console.WriteLine("Presione cualquier tecla para salir: ");
-                    Console.ReadKey();
+                    SaveData();
                     break;
                 case 2:
-                    Console.Clear();
-                    System.Console.WriteLine("=== Cargar datos ===");
-                    System.Console.WriteLine("Cargando información al sistema...");
-                    System.Console.WriteLine("Presione cualquier tecla para salir: ");
-                    Console.ReadKey();
+                    LoadData();
                     break;
                 case 3:
-                    Console.Clear();
-                    System.Console.WriteLine("=== Reiniciar datos ===");
-                    System.Console.WriteLine("¿Está seguro que desea vaciar todo? (S/N): ");
-                    string answer = Console.ReadLine()?.Trim().ToUpper();
-                    if (answer == "S")
-                    {
-                        System.Console.WriteLine("Datos reiniciados con éxito.");
-                    }
-                    else
-                    {
-                        System.Console.WriteLine("Operación cancelada.");
-                    }
-                    System.Console.WriteLine("Presione cualquier tecla para salir: ");
-                    Console.ReadKey();
+                    ConfirmResetData();
                     break;
                 case 4:
                     break;
@@ -777,5 +756,46 @@ class Program
                     break;
             }
         } while (userOption != exitNumber);
+
+        static void SaveData()
+        {
+            Console.Clear();
+            System.Console.WriteLine("=== Guardar datos ===");
+            System.Console.WriteLine("Guardando información de libros, usuarios y préstamos...");
+            System.Console.WriteLine("Presione cualquier tecla para salir: ");
+            Console.ReadKey();
+        }
+
+        static void LoadData()
+        {
+            Console.Clear();
+            System.Console.WriteLine("=== Cargar datos ===");
+            System.Console.WriteLine("Cargando información al sistema...");
+            System.Console.WriteLine("Presione cualquier tecla para salir: ");
+            Console.ReadKey();
+        }
+
+        static void ConfirmResetData()
+        {
+            Console.Clear();
+            System.Console.WriteLine("=== Reiniciar datos ===");
+            System.Console.WriteLine("¿Está seguro que desea vaciar todo? (S/N): ");
+            string? answer = Console.ReadLine()?.Trim().ToUpper();
+            if (answer == "S")
+            {
+                ResetData();
+            }
+            else
+            {
+                System.Console.WriteLine("Operación cancelada.");
+            }
+            System.Console.WriteLine("Presione cualquier tecla para salir: ");
+            Console.ReadKey();
+        }
+
+        static void ResetData()
+        {
+            System.Console.WriteLine("Datos reiniciados con éxito.");
+        }
     }
 }
