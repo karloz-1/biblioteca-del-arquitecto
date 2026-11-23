@@ -72,16 +72,25 @@ class Program
     {
         Console.Clear();
         System.Console.WriteLine("=== Salir ===");
-        System.Console.WriteLine("¿Guardar los datos antes de salir? (S/N): ");
-        string answer = Console.ReadLine()?.Trim().ToUpper();
+        ConfirmExitAndSave();
+        System.Console.WriteLine("Saliendo del sistema... ¡Hasta pronto!");
+        System.Console.WriteLine("Presione cualquier tecla para cerrar.");
+        Console.ReadKey();
+    }
+
+    static void ConfirmExitAndSave()
+    {
+        System.Console.WriteLine("¿Guardar antes de salir? (S/N): ");
+        string? answer = Console.ReadLine()?.Trim().ToUpper();
         if (answer == "S")
         {
             System.Console.WriteLine("Guardando datos...");
             System.Console.WriteLine("Datos guardados exitosamente.");
         }
-        System.Console.WriteLine("Saliendo del sistema... ¡Hasta pronto!");
-        System.Console.WriteLine("Presione cualquier tecla para cerrar.");
-        Console.ReadKey();
+        else
+        {
+            System.Console.WriteLine("Saliendo sin guardar cambios.");
+        }
     }
 
     static void BooksMenu()
