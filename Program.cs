@@ -123,7 +123,7 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("=== Registrar Libro ===");
-            System.Console.WriteLine("Registrando libros...");
+            System.Console.WriteLine("Registrando libro (simulación sin persistencia)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -162,7 +162,7 @@ class Program
             {
                 Console.Clear();
                 System.Console.WriteLine("=== Mostrar todos los libros ===");
-                System.Console.WriteLine("Mostrando todos libros...");
+                System.Console.WriteLine("Mostrando todos los libros...");
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -190,7 +190,7 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("=== Ver detalles del libro ===");
-            System.Console.WriteLine("Mostrando detalles del libro...");
+            System.Console.WriteLine("Mostrando detalles del libro (por ID/ISBN)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -244,8 +244,8 @@ class Program
             static void EditBookYearCategory()
             {
                 Console.Clear();
-                System.Console.WriteLine("=== Editar año o categoria del Libro ===");
-                System.Console.WriteLine("Editando año o categoria del Libro...");
+                System.Console.WriteLine("=== Editar año / categoría del Libro ===");
+                System.Console.WriteLine("Editando año / categoría del Libro...");
                 System.Console.WriteLine("Presione cualquier tecla para salir: ");
                 Console.ReadKey();
             }
@@ -255,7 +255,8 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("=== Eliminar Libro ===");
-            System.Console.WriteLine("Eliminando libro (validando que no esté prestado)...");
+            System.Console.WriteLine("Validando que no esté prestado: no se permite eliminar un libro prestado...");
+            System.Console.WriteLine("Eliminando libro (simulación)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
