@@ -301,7 +301,7 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("=== Registrar Usuario ===");
-            System.Console.WriteLine("Registrando usuario...");
+            System.Console.WriteLine("Registrando usuario (simulación sin persistencia)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -386,7 +386,8 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("=== Eliminar Usuario ===");
-            System.Console.WriteLine("Eliminando usuario (validando préstamos activos)...");
+            System.Console.WriteLine("Validando préstamos activos: no se permite eliminar un usuario con préstamos activos...");
+            System.Console.WriteLine("Eliminando usuario (simulación)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
