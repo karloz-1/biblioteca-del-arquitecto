@@ -432,7 +432,11 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("=== Crear préstamo ===");
-            System.Console.WriteLine("Validando usuario y libro. Creando préstamo...");
+            System.Console.WriteLine("Validaciones sugeridas antes de crear el préstamo:");
+            System.Console.WriteLine("- El usuario debe existir y estar activo.");
+            System.Console.WriteLine("- El libro debe existir y estar disponible.");
+            System.Console.WriteLine("- El usuario no debe superar el límite de préstamos permitidos.");
+            System.Console.WriteLine("Creando préstamo (simulación)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
@@ -517,7 +521,8 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("=== Eliminar préstamo ===");
-            System.Console.WriteLine("Eliminando registro de préstamo...");
+            System.Console.WriteLine("Reglas sugeridas: solo eliminar préstamos cerrados o corregidos, nunca uno activo sin devolución.");
+            System.Console.WriteLine("Eliminando registro de préstamo (simulación)...");
             System.Console.WriteLine("Presione cualquier tecla para salir: ");
             Console.ReadKey();
         }
